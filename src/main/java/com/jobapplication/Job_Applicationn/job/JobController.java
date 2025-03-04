@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/jobs")
 public class JobController {
     //    private List<Job> jobs = new ArrayList<>();
     private JobService jobService;
@@ -16,18 +17,18 @@ public class JobController {
         this.jobService = jobService;
     }
 
-    @GetMapping("/jobs")
+    @GetMapping
     public ResponseEntity<List<Job>> findAll() {
         return new ResponseEntity<>(jobService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/jobs")
+    @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
         return new ResponseEntity<>("job added successfully!", HttpStatus.OK);
     }
 
-    @GetMapping("/jobs/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Job> getJobById(@PathVariable Long id) {
 
         Job job = jobService.getJobById(id);
@@ -37,7 +38,7 @@ public class JobController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("jobs/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletedJob(@PathVariable Long id) {
         boolean deleted = jobService.deleteJobById(id);
         if (deleted) {
@@ -46,8 +47,8 @@ public class JobController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //    @PutMapping("/jobs/{id}")
-    @RequestMapping(value = "/jobs/{id}", method =
+    //    @PutMapping("/{id}")
+    @RequestMapping(value = "/{id}", method =
             RequestMethod
                     .PUT
     )
