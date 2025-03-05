@@ -35,26 +35,11 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Job getJobById(Long id) {
-//        for (Job job : jobs) {
-//            if (job.getId().equals(id)) {
-//                return job;
-//            }
-//        }
-//        return null;
         return jobRepository.findById(id).orElse(null);
     }
 
     @Override
     public boolean deleteJobById(Long id) {
-//        Iterator<Job> iterator = jobs.iterator();
-//        while (iterator.hasNext()) {
-//            Job job = iterator.next();
-//            if (job.getId().equals(id)) {
-//                iterator.remove();
-//                return true;
-//            }
-//        }
-//        return false;
         try {
             jobRepository.deleteById(id);
             return true;
@@ -73,6 +58,7 @@ public class JobServiceImpl implements JobService {
             job.setMinSalary(updatedJob.getMinSalary());
             job.setMaxSalary(updatedJob.getMaxSalary());
             job.setLocation(updatedJob.getLocation());
+            jobRepository.save(job);
             return true;
         }
         return false;
