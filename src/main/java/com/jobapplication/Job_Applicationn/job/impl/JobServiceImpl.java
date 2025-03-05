@@ -15,12 +15,12 @@ import java.util.Optional;
 public class JobServiceImpl implements JobService {
     //    private List<Job> jobs = new ArrayList<>();
     JobRepository jobRepository;
+    private Long nextId = 1L;
 
     public JobServiceImpl(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }
-
-    private Long nextId = 1L;
+    
 
     @Override
     public List<Job> findAll() {
